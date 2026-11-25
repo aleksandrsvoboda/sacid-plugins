@@ -15,7 +15,8 @@ $catalogue = @(
     @{ Name = 'SacidSampler'; Tag = 'sacidsampler-1.1'; Old = @('AcidSampler');         Desc = 'pitch-tracking sampler' },
     @{ Name = 'SacidKit';     Tag = 'sacidkit-1.1';     Old = @('AcidKit');             Desc = '808 / 909 drum machine' },
     @{ Name = 'Sacid303';     Tag = 'sacid303-2.1';     Old = @('Acid303');             Desc = '303 bass synth + sequencer' },
-    @{ Name = 'SacidHalo';    Tag = 'sacidhalo-1.0';    Old = @();                      Desc = 'harmonic exciter + reverb (effect)' }
+    @{ Name = 'SacidHalo';    Tag = 'sacidhalo-1.0';    Old = @();                      Desc = 'harmonic exciter + reverb (effect)' },
+    @{ Name = 'SacidThread';  Tag = 'sacidthread-1.0';  Old = @();                      Desc = 'MIDI loop generator, Marbles-style (for another synth)' }
 )
 
 # --- Pick which ones (before asking for administrator rights) ---------------------------

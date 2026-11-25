@@ -1,6 +1,6 @@
 # Sacid plugins
 
-Free VST3 instruments and effects for Ableton Live and other DAWs. Each one is also a standalone app on Windows and Linux.
+Free VST3 instruments, effects and a MIDI generator for Ableton Live and other DAWs. Each one is also a standalone app on Windows and Linux (SacidThread on the Mac too).
 
 | Plugin | What it is | Mac | Windows | Linux |
 |---|---|---|---|---|
@@ -9,10 +9,11 @@ Free VST3 instruments and effects for Ableton Live and other DAWs. Each one is a
 | **SacidKit** 1.1 | TR-808 / TR-909 style drum machine. Shape each drum, play the kit or drag drums into Live as samples. | [zip](https://github.com/aleksandrsvoboda/sacid-plugins/releases/download/sacidkit-1.1/SacidKit-macos.zip) | [zip](https://github.com/aleksandrsvoboda/sacid-plugins/releases/download/sacidkit-1.1/SacidKit-win64.zip) | [tar.gz](https://github.com/aleksandrsvoboda/sacid-plugins/releases/download/sacidkit-1.1/SacidKit-linux-x64.tar.gz) |
 | **Sacid303** 2.1 | TB-303 style bass synth and acid workstation, with a 16-pattern sequencer. | [zip](https://github.com/aleksandrsvoboda/sacid-plugins/releases/download/sacid303-2.1/Sacid303-macos.zip) | [zip](https://github.com/aleksandrsvoboda/sacid-plugins/releases/download/sacid303-2.1/Sacid303-win64.zip) | [tar.gz](https://github.com/aleksandrsvoboda/sacid-plugins/releases/download/sacid303-2.1/Sacid303-linux-x64.tar.gz) |
 | **SacidHalo** 1.0 | *Effect*: a harmonic exciter (even or odd harmonics, filtered) feeding a reverb with attack, decay, size, diffusion and width. | [zip](https://github.com/aleksandrsvoboda/sacid-plugins/releases/download/sacidhalo-1.0/SacidHalo-macos.zip) | [zip](https://github.com/aleksandrsvoboda/sacid-plugins/releases/download/sacidhalo-1.0/SacidHalo-win64.zip) | [tar.gz](https://github.com/aleksandrsvoboda/sacid-plugins/releases/download/sacidhalo-1.0/SacidHalo-linux-x64.tar.gz) |
+| **SacidThread** 1.0 | *MIDI generator*: three interlocking loops (rhythm, pitch, accent) in the spirit of Mutable Instruments Marbles, for hypnotic minimal, microhouse and dub techno. It plays another synth (see below). Mutation, loop lock and a seed you can recall; the standalone app has its own transport and a preview sound. | [zip](https://github.com/aleksandrsvoboda/sacid-plugins/releases/download/sacidthread-1.0/SacidThread-macos.zip) | [zip](https://github.com/aleksandrsvoboda/sacid-plugins/releases/download/sacidthread-1.0/SacidThread-win64.zip) | [tar.gz](https://github.com/aleksandrsvoboda/sacid-plugins/releases/download/sacidthread-1.0/SacidThread-linux-x64.tar.gz) |
 
 ## Install with one command
 
-Each command lists the five plugins, marks the ones you already have, and asks which to install:
+Each command lists the six plugins, marks the ones you already have, and asks which to install:
 
 ```
   1) SacidOne      mono synth: analog / FM / granular + step sequencer   [installed]
@@ -20,6 +21,7 @@ Each command lists the five plugins, marks the ones you already have, and asks w
   3) SacidKit      808 / 909 drum machine
   4) Sacid303      303 bass synth + sequencer
   5) SacidHalo     harmonic exciter + reverb (effect)
+  6) SacidThread   MIDI loop generator, Marbles-style (for another synth)
 
 Which ones? Numbers like "1 3 5", Enter = all, q = quit:
 ```
@@ -34,7 +36,7 @@ Open **Terminal** (Cmd+Space, type Terminal), paste this line and press Enter. I
 curl -fsSL https://raw.githubusercontent.com/aleksandrsvoboda/sacid-plugins/main/install-mac.sh | bash
 ```
 
-The plugins aren't notarised by Apple. The installer removes the "downloaded from the internet" block, which is why hand-installed copies get called "damaged". The "Open Anyway" button doesn't work for plugins.
+SacidThread's standalone app goes into **Applications**. The plugins aren't notarised by Apple. The installer removes the "downloaded from the internet" block, which is why hand-installed copies get called "damaged". The "Open Anyway" button doesn't work for plugins.
 
 ### Windows
 
@@ -62,4 +64,12 @@ The plugins go into `~/.vst3` and the standalone apps into `~/.local/bin`.
 2. Turn on *Use VST3 Plug-In System Folders*.
 3. Click **Rescan**. On a Mac, hold **Option** while you click it.
 
-The plugins are under **Plug-Ins > VST3 > Sacid**. SacidHalo is an audio effect, and the other four are instruments.
+The plugins are under **Plug-Ins > VST3 > Sacid**. SacidHalo is an audio effect, SacidThread is a MIDI generator, and the other four are instruments.
+
+### SacidThread: playing another synth
+
+SacidThread makes notes, not sound. Live only takes MIDI from plugins that load as instruments, so it loads as one:
+
+1. Put **SacidThread** on a MIDI track. That track stays silent.
+2. On a second MIDI track with the synth that should play, set **MIDI From** to the SacidThread track, choose **SacidThread** in the box below it, and set **Monitor** to **In**.
+3. Press Play. It follows Live's tempo and song position. Arm the second track and record to keep the notes.
