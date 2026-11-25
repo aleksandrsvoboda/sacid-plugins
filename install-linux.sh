@@ -16,7 +16,8 @@ SacidSampler|sacidsampler-1.1|AcidSampler|pitch-tracking sampler
 SacidKit|sacidkit-1.1|AcidKit|808 / 909 drum machine
 Sacid303|sacid303-2.1|Acid303|303 bass synth + sequencer
 SacidHalo|sacidhalo-1.0||harmonic exciter + reverb (effect)
-SacidThread|sacidthread-1.0||MIDI loop generator, Marbles-style (for another synth)"
+SacidThread|sacidthread-1.0||MIDI loop generator, Marbles-style (for another synth)
+SacidOddVoice|sacidoddvoice-1.0||odd short sounds: Plaits string / FM / noise"
 
 entries() { echo "$CATALOGUE" | sed '/^$/d'; }
 count="$(entries | wc -l | tr -d ' ')"
