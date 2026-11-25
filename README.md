@@ -1,6 +1,6 @@
 # Sacid plugins
 
-Free VST3 instruments, effects and a MIDI generator for Ableton Live and other DAWs. Each one is also a standalone app on Windows and Linux (SacidThread and SacidOddVoice on the Mac too).
+Free VST3 instruments, effects and a MIDI generator for Ableton Live and other DAWs. Each one is also a standalone app on Windows and Linux (SacidThread, SacidOddVoice and SacidDubFog on the Mac too).
 
 | Plugin | What it is | Mac | Windows | Linux |
 |---|---|---|---|---|
@@ -10,11 +10,12 @@ Free VST3 instruments, effects and a MIDI generator for Ableton Live and other D
 | **Sacid303** 2.1 | TB-303 style bass synth and acid workstation, with a 16-pattern sequencer. | [zip](https://github.com/aleksandrsvoboda/sacid-plugins/releases/download/sacid303-2.1/Sacid303-macos.zip) | [zip](https://github.com/aleksandrsvoboda/sacid-plugins/releases/download/sacid303-2.1/Sacid303-win64.zip) | [tar.gz](https://github.com/aleksandrsvoboda/sacid-plugins/releases/download/sacid303-2.1/Sacid303-linux-x64.tar.gz) |
 | **SacidHalo** 1.0 | *Effect*: a harmonic exciter (even or odd harmonics, filtered) feeding a reverb with attack, decay, size, diffusion and width. | [zip](https://github.com/aleksandrsvoboda/sacid-plugins/releases/download/sacidhalo-1.0/SacidHalo-macos.zip) | [zip](https://github.com/aleksandrsvoboda/sacid-plugins/releases/download/sacidhalo-1.0/SacidHalo-win64.zip) | [tar.gz](https://github.com/aleksandrsvoboda/sacid-plugins/releases/download/sacidhalo-1.0/SacidHalo-linux-x64.tar.gz) |
 | **SacidThread** 1.0 | *MIDI generator*: three interlocking loops (rhythm, pitch, accent) in the spirit of Mutable Instruments Marbles, for hypnotic minimal, microhouse and dub techno. It plays another synth (see below). Mutation, loop lock and a seed you can recall; the standalone app has its own transport and a preview sound. | [zip](https://github.com/aleksandrsvoboda/sacid-plugins/releases/download/sacidthread-1.0/SacidThread-macos.zip) | [zip](https://github.com/aleksandrsvoboda/sacid-plugins/releases/download/sacidthread-1.0/SacidThread-win64.zip) | [tar.gz](https://github.com/aleksandrsvoboda/sacid-plugins/releases/download/sacidthread-1.0/SacidThread-linux-x64.tar.gz) |
-| **SacidOddVoice** 1.0 | Mono digital voice for odd short sounds (clicks, wood, bells, rubber basses, ghost noise) on the engine code of Mutable Instruments Plaits: string, FM and noise modes, a low-pass gate that velocity strikes harder, LFO / random / envelope modulation. | [zip](https://github.com/aleksandrsvoboda/sacid-plugins/releases/download/sacidoddvoice-1.0/SacidOddVoice-macos.zip) | [zip](https://github.com/aleksandrsvoboda/sacid-plugins/releases/download/sacidoddvoice-1.0/SacidOddVoice-win64.zip) | [tar.gz](https://github.com/aleksandrsvoboda/sacid-plugins/releases/download/sacidoddvoice-1.0/SacidOddVoice-linux-x64.tar.gz) |
+| **SacidOddVoice** 1.0.1 | Mono digital voice for odd short sounds (clicks, wood, bells, rubber basses, ghost noise) on the engine code of Mutable Instruments Plaits: string, FM and noise modes, a low-pass gate that velocity strikes harder, LFO / random / envelope modulation. | [zip](https://github.com/aleksandrsvoboda/sacid-plugins/releases/download/sacidoddvoice-1.0.1/SacidOddVoice-macos.zip) | [zip](https://github.com/aleksandrsvoboda/sacid-plugins/releases/download/sacidoddvoice-1.0.1/SacidOddVoice-win64.zip) | [tar.gz](https://github.com/aleksandrsvoboda/sacid-plugins/releases/download/sacidoddvoice-1.0.1/SacidOddVoice-linux-x64.tar.gz) |
+| **SacidDubFog** 1.0 | *Effect*: live audio into drifting granular textures (the grain engine of Mutable Instruments Clouds: position, size, pitch, density, texture, spread, freeze) and a dark dub delay synced to the tempo (1/8, dotted 1/8, 1/4, with low / high cut and saturation in the repeats). A frozen sound is saved with the project. | [zip](https://github.com/aleksandrsvoboda/sacid-plugins/releases/download/saciddubfog-1.0/SacidDubFog-macos.zip) | [zip](https://github.com/aleksandrsvoboda/sacid-plugins/releases/download/saciddubfog-1.0/SacidDubFog-win64.zip) | [tar.gz](https://github.com/aleksandrsvoboda/sacid-plugins/releases/download/saciddubfog-1.0/SacidDubFog-linux-x64.tar.gz) |
 
 ## Install with one command
 
-Each command lists the seven plugins, marks the ones you already have, and asks which to install:
+Each command lists the eight plugins, marks the ones you already have, and asks which to install:
 
 ```
   1) SacidOne      mono synth: analog / FM / granular + step sequencer   [installed]
@@ -24,6 +25,7 @@ Each command lists the seven plugins, marks the ones you already have, and asks 
   5) SacidHalo     harmonic exciter + reverb (effect)
   6) SacidThread   MIDI loop generator, Marbles-style (for another synth)
   7) SacidOddVoice odd short sounds: Plaits string / FM / noise
+  8) SacidDubFog   Clouds grains into a dub delay (effect)
 
 Which ones? Numbers like "1 3 5", Enter = all, q = quit:
 ```
@@ -38,7 +40,7 @@ Open **Terminal** (Cmd+Space, type Terminal), paste this line and press Enter. I
 curl -fsSL https://raw.githubusercontent.com/aleksandrsvoboda/sacid-plugins/main/install-mac.sh | bash
 ```
 
-SacidThread's and SacidOddVoice's standalone apps go into **Applications**. The plugins aren't notarised by Apple. The installer removes the "downloaded from the internet" block, which is why hand-installed copies get called "damaged". The "Open Anyway" button doesn't work for plugins.
+The standalone apps of SacidThread, SacidOddVoice and SacidDubFog go into **Applications**. The plugins aren't notarised by Apple. The installer removes the "downloaded from the internet" block, which is why hand-installed copies get called "damaged". The "Open Anyway" button doesn't work for plugins.
 
 ### Windows
 
@@ -66,7 +68,7 @@ The plugins go into `~/.vst3` and the standalone apps into `~/.local/bin`.
 2. Turn on *Use VST3 Plug-In System Folders*.
 3. Click **Rescan**. On a Mac, hold **Option** while you click it.
 
-The plugins are under **Plug-Ins > VST3 > Sacid**. SacidHalo is an audio effect, SacidThread is a MIDI generator, and the other five are instruments.
+The plugins are under **Plug-Ins > VST3 > Sacid**. SacidHalo and SacidDubFog are audio effects (under Audio Effects), SacidThread is a MIDI generator, and the other five are instruments.
 
 ### SacidThread: playing another synth
 

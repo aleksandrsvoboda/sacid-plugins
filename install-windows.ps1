@@ -17,7 +17,8 @@ $catalogue = @(
     @{ Name = 'Sacid303';     Tag = 'sacid303-2.1';     Old = @('Acid303');             Desc = '303 bass synth + sequencer' },
     @{ Name = 'SacidHalo';    Tag = 'sacidhalo-1.0';    Old = @();                      Desc = 'harmonic exciter + reverb (effect)' },
     @{ Name = 'SacidThread';  Tag = 'sacidthread-1.0';  Old = @();                      Desc = 'MIDI loop generator, Marbles-style (for another synth)' },
-    @{ Name = 'SacidOddVoice'; Tag = 'sacidoddvoice-1.0'; Old = @();                     Desc = 'odd short sounds: Plaits string / FM / noise' }
+    @{ Name = 'SacidOddVoice'; Tag = 'sacidoddvoice-1.0.1'; Old = @();                   Desc = 'odd short sounds: Plaits string / FM / noise' },
+    @{ Name = 'SacidDubFog';   Tag = 'saciddubfog-1.0';   Old = @();                     Desc = 'Clouds grains into a dub delay (effect)' }
 )
 
 # --- Pick which ones (before asking for administrator rights) ---------------------------
