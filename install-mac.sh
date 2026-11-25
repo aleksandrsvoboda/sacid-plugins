@@ -6,6 +6,7 @@
 set -u
 REPO="${SACID_REPO:-https://github.com/aleksandrsvoboda/sacid-plugins/releases/download}"
 DEST="${SACID_DEST:-/Library/Audio/Plug-Ins/VST3}"
+APPS="${SACID_APPS:-/Applications}"   # for plug-ins whose zip also has a standalone .app
 PLUGIN_DIR="$DEST"
 SUDO="sudo"; [ -n "${SACID_DEST:-}" ] && SUDO=""
 # --- Pick which plug-ins to install --------------------------------------------------
@@ -15,7 +16,8 @@ SacidOne|sacidone-1.2|AcidOne SacedOne|mono synth: analog / FM / granular + step
 SacidSampler|sacidsampler-1.1|AcidSampler|pitch-tracking sampler
 SacidKit|sacidkit-1.1|AcidKit|808 / 909 drum machine
 Sacid303|sacid303-2.1|Acid303|303 bass synth + sequencer
-SacidHalo|sacidhalo-1.0||harmonic exciter + reverb (effect)"
+SacidHalo|sacidhalo-1.0||harmonic exciter + reverb (effect)
+SacidThread|sacidthread-1.0||MIDI loop generator, Marbles-style (for another synth)"
 
 entries() { echo "$CATALOGUE" | sed '/^$/d'; }
 count="$(entries | wc -l | tr -d ' ')"
@@ -96,6 +98,10 @@ while IFS='|' read -r name tag olds desc; do
         || { say "  $name: unzip failed, skipped"; continue; }
     $SUDO rm -rf "$DEST/$name.vst3" "$HOME/Library/Audio/Plug-Ins/VST3/$name.vst3"   # one copy only
     $SUDO cp -R "$TMP/$name/$name.vst3" "$DEST/" && { $SUDO xattr -cr "$DEST/$name.vst3" 2>/dev/null || true; } && say "  $name: installed"
+    if [ -d "$TMP/$name/$name.app" ]; then
+        $SUDO mkdir -p "$APPS" && $SUDO rm -rf "$APPS/$name.app" && $SUDO cp -R "$TMP/$name/$name.app" "$APPS/" \
+            && { $SUDO xattr -cr "$APPS/$name.app" 2>/dev/null || true; } && say "  $name: app in $APPS"
+    fi
 done <<< "$(entries)"
 
 say ""
