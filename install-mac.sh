@@ -22,7 +22,7 @@ SacidHalo|sacidhalo-1.0||harmonic exciter + reverb (effect)
 SacidThread|sacidthread-1.0||MIDI loop generator, Marbles-style (for another synth)
 SacidOddVoice|sacidoddvoice-1.0.1||odd short sounds: Plaits string / FM / noise
 SacidDubFog|saciddubfog-1.0||Clouds grains into a dub delay (effect)
-SacidThread-M4L|sacidthread-m4l-1.2|THREAD|THREAD as a Max for Live MIDI effect, same track as the synth"
+SacidThread-M4L|sacidthread-m4l-1.2.1|THREAD|THREAD as a Max for Live MIDI effect, same track as the synth"
 
 entries() { echo "$CATALOGUE" | sed '/^$/d'; }
 count="$(entries | wc -l | tr -d ' ')"
