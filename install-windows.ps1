@@ -8,6 +8,9 @@ $script = 'https://raw.githubusercontent.com/aleksandrsvoboda/sacid-plugins/main
 $repo = if ($env:SACID_REPO) { $env:SACID_REPO } else { 'https://github.com/aleksandrsvoboda/sacid-plugins/releases/download' }
 $vst3 = if ($env:SACID_DEST) { $env:SACID_DEST } else { Join-Path $env:CommonProgramFiles 'VST3' }
 $apps = if ($env:SACID_APPS) { $env:SACID_APPS } else { Join-Path $env:ProgramFiles 'Sacid' }
+# Max for Live devices (catalogue names ending in -M4L) go into the User Library.
+$userLibrary = if ($env:SACID_USERLIB) { $env:SACID_USERLIB } else { Join-Path ([Environment]::GetFolderPath('MyDocuments')) 'Ableton\User Library' }
+$m4l = Join-Path $userLibrary 'Presets\MIDI Effects\Max MIDI Effect'
 
 # Name, release tag, earlier names (removed when that plug-in is installed), description.
 $catalogue = @(
@@ -18,7 +21,8 @@ $catalogue = @(
     @{ Name = 'SacidHalo';    Tag = 'sacidhalo-1.0';    Old = @();                      Desc = 'harmonic exciter + reverb (effect)' },
     @{ Name = 'SacidThread';  Tag = 'sacidthread-1.0';  Old = @();                      Desc = 'MIDI loop generator, Marbles-style (for another synth)' },
     @{ Name = 'SacidOddVoice'; Tag = 'sacidoddvoice-1.0.1'; Old = @();                   Desc = 'odd short sounds: Plaits string / FM / noise' },
-    @{ Name = 'SacidDubFog';   Tag = 'saciddubfog-1.0';   Old = @();                     Desc = 'Clouds grains into a dub delay (effect)' }
+    @{ Name = 'SacidDubFog';   Tag = 'saciddubfog-1.0';   Old = @();                     Desc = 'Clouds grains into a dub delay (effect)' },
+    @{ Name = 'THREAD-M4L';    Tag = 'sacidthread-m4l-1.1'; Old = @();                   Desc = 'THREAD as a Max for Live MIDI effect, same track as the synth' }
 )
 
 # --- Pick which ones (before asking for administrator rights) ---------------------------
@@ -29,7 +33,8 @@ if ($env:SACID_ONLY) {
     Write-Host 'Sacid plug-ins:'
     for ($i = 0; $i -lt $catalogue.Count; $i++) {
         $c = $catalogue[$i]
-        $mark = if (Test-Path (Join-Path $vst3 ($c.Name + '.vst3'))) { '  [installed]' } else { '' }
+        $device = $c.Name -replace '-M4L$', ''
+        $mark = if ((Test-Path (Join-Path $vst3 ($c.Name + '.vst3'))) -or (Test-Path (Join-Path $m4l "$device\$device.amxd"))) { '  [installed]' } else { '' }
         Write-Host ('  {0}) {1,-13} {2}{3}' -f ($i + 1), $c.Name, $c.Desc, $mark)
     }
     Write-Host ''
@@ -73,6 +78,20 @@ foreach ($c in $catalogue) {
         Remove-Item -Force (Join-Path $apps "$old.exe") -ErrorAction SilentlyContinue
     }
     $zip = Join-Path $tmp "$name.zip"
+    if ($name -like '*-M4L') {
+        # A Max for Live device: one zip for every system, into the User Library.
+        $device = $name -replace '-M4L$', ''
+        try { Invoke-WebRequest -UseBasicParsing -Uri "$repo/$($c.Tag)/$name.zip" -OutFile $zip }
+        catch { Write-Host "  ${name}: download failed, skipped (try again in a few minutes)"; continue }
+        $out = Join-Path $tmp $name
+        Expand-Archive -Force $zip $out
+        Get-ChildItem -Recurse $out | Unblock-File
+        New-Item -ItemType Directory -Force $m4l | Out-Null
+        Remove-Item -Recurse -Force (Join-Path $m4l $device) -ErrorAction SilentlyContinue
+        Copy-Item -Recurse (Join-Path $out $device) $m4l
+        Write-Host "  ${name}: Max for Live device in $(Join-Path $m4l $device) (needs Live Suite or Max for Live)"
+        continue
+    }
     try { Invoke-WebRequest -UseBasicParsing -Uri "$repo/$($c.Tag)/$name-win64.zip" -OutFile $zip }
     catch { Write-Host "  ${name}: download failed, skipped (try again in a few minutes)"; continue }
     $out = Join-Path $tmp $name
