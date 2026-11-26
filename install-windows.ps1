@@ -19,9 +19,9 @@ $catalogue = @(
     @{ Name = 'SacidKit';     Tag = 'sacidkit-1.1';     Old = @('AcidKit');             Desc = '808 / 909 drum machine' },
     @{ Name = 'Sacid303';     Tag = 'sacid303-2.1';     Old = @('Acid303');             Desc = '303 bass synth + sequencer' },
     @{ Name = 'SacidHalo';    Tag = 'sacidhalo-1.0';    Old = @();                      Desc = 'harmonic exciter + reverb (effect)' },
-    @{ Name = 'SacidThread';  Tag = 'sacidthread-1.0';  Old = @();                      Desc = 'MIDI loop generator, Marbles-style (for another synth)' },
+    @{ Name = 'SacidThread';  Tag = 'sacidthread-1.1';  Old = @();                      Desc = 'MIDI loop generator, Marbles-style (for another synth)' },
     @{ Name = 'SacidOddVoice'; Tag = 'sacidoddvoice-1.0.1'; Old = @();                   Desc = 'odd short sounds: Plaits string / FM / noise' },
-    @{ Name = 'SacidDubFog';   Tag = 'saciddubfog-1.0';   Old = @();                     Desc = 'Clouds grains into a dub delay (effect)' },
+    @{ Name = 'SacidDubFog';   Tag = 'saciddubfog-1.1';   Old = @();                     Desc = 'Clouds grains into a dub delay (effect)' },
     @{ Name = 'SacidThread-M4L'; Tag = 'sacidthread-m4l-1.2.2'; Old = @('THREAD');            Desc = 'THREAD as a Max for Live MIDI effect, same track as the synth' }
 )
 
