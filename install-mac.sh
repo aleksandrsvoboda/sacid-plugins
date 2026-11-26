@@ -7,6 +7,8 @@ set -u
 REPO="${SACID_REPO:-https://github.com/aleksandrsvoboda/sacid-plugins/releases/download}"
 DEST="${SACID_DEST:-/Library/Audio/Plug-Ins/VST3}"
 APPS="${SACID_APPS:-/Applications}"   # for plug-ins whose zip also has a standalone .app
+# Max for Live devices (catalogue names ending in -M4L) go into the User Library, as the user.
+M4L="${SACID_USERLIB:-$HOME/Music/Ableton/User Library}/Presets/MIDI Effects/Max MIDI Effect"
 PLUGIN_DIR="$DEST"
 SUDO="sudo"; [ -n "${SACID_DEST:-}" ] && SUDO=""
 # --- Pick which plug-ins to install --------------------------------------------------
@@ -19,7 +21,8 @@ Sacid303|sacid303-2.1|Acid303|303 bass synth + sequencer
 SacidHalo|sacidhalo-1.0||harmonic exciter + reverb (effect)
 SacidThread|sacidthread-1.0||MIDI loop generator, Marbles-style (for another synth)
 SacidOddVoice|sacidoddvoice-1.0.1||odd short sounds: Plaits string / FM / noise
-SacidDubFog|saciddubfog-1.0||Clouds grains into a dub delay (effect)"
+SacidDubFog|saciddubfog-1.0||Clouds grains into a dub delay (effect)
+THREAD-M4L|sacidthread-m4l-1.1||THREAD as a Max for Live MIDI effect, same track as the synth"
 
 entries() { echo "$CATALOGUE" | sed '/^$/d'; }
 count="$(entries | wc -l | tr -d ' ')"
@@ -49,7 +52,7 @@ else
     while IFS='|' read -r name tag olds desc; do
         i=$((i + 1))
         mark=""
-        if [ -e "$PLUGIN_DIR/$name.vst3" ]; then mark="  [installed]"; fi
+        if [ -e "$PLUGIN_DIR/$name.vst3" ] || [ -e "$M4L/${name%-M4L}/${name%-M4L}.amxd" ]; then mark="  [installed]"; fi
         say "$(printf '  %d) %-13s %s%s' "$i" "$name" "$desc" "$mark")"
     done <<< "$(entries)"
     say ""
@@ -91,6 +94,21 @@ while IFS='|' read -r name tag olds desc; do
     for old in $olds; do
         $SUDO rm -rf "$DEST/$old.vst3" "$HOME/Library/Audio/Plug-Ins/VST3/$old.vst3"
     done
+    case "$name" in
+        *-M4L)
+            # A Max for Live device: one zip for every system, into the User Library.
+            device="${name%-M4L}"
+            if ! curl -fsSL -o "$TMP/$name.zip" "$REPO/$tag/$name.zip"; then
+                say "  $name: download failed, skipped (try again in a few minutes)"; continue
+            fi
+            mkdir -p "$TMP/$name"
+            if command -v ditto >/dev/null; then ditto -x -k "$TMP/$name.zip" "$TMP/$name"; else unzip -q "$TMP/$name.zip" -d "$TMP/$name"; fi \
+                || { say "  $name: unzip failed, skipped"; continue; }
+            mkdir -p "$M4L" && rm -rf "$M4L/$device" && cp -R "$TMP/$name/$device" "$M4L/" \
+                && { xattr -cr "$M4L/$device" 2>/dev/null || true; } \
+                && say "  $name: Max for Live device in $M4L/$device (needs Live Suite or Max for Live)"
+            continue ;;
+    esac
     if ! curl -fsSL -o "$TMP/$name.zip" "$REPO/$tag/$name-macos.zip"; then
         say "  $name: download failed, skipped (try again in a few minutes)"
         continue

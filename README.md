@@ -12,10 +12,11 @@ Free VST3 instruments, effects and a MIDI generator for Ableton Live and other D
 | **SacidThread** 1.0 | *MIDI generator*: three interlocking loops (rhythm, pitch, accent) in the spirit of Mutable Instruments Marbles, for hypnotic minimal, microhouse and dub techno. It plays another synth (see below). Mutation, loop lock and a seed you can recall; the standalone app has its own transport and a preview sound. | [zip](https://github.com/aleksandrsvoboda/sacid-plugins/releases/download/sacidthread-1.0/SacidThread-macos.zip) | [zip](https://github.com/aleksandrsvoboda/sacid-plugins/releases/download/sacidthread-1.0/SacidThread-win64.zip) | [tar.gz](https://github.com/aleksandrsvoboda/sacid-plugins/releases/download/sacidthread-1.0/SacidThread-linux-x64.tar.gz) |
 | **SacidOddVoice** 1.0.1 | Mono digital voice for odd short sounds (clicks, wood, bells, rubber basses, ghost noise) on the engine code of Mutable Instruments Plaits: string, FM and noise modes, a low-pass gate that velocity strikes harder, LFO / random / envelope modulation. | [zip](https://github.com/aleksandrsvoboda/sacid-plugins/releases/download/sacidoddvoice-1.0.1/SacidOddVoice-macos.zip) | [zip](https://github.com/aleksandrsvoboda/sacid-plugins/releases/download/sacidoddvoice-1.0.1/SacidOddVoice-win64.zip) | [tar.gz](https://github.com/aleksandrsvoboda/sacid-plugins/releases/download/sacidoddvoice-1.0.1/SacidOddVoice-linux-x64.tar.gz) |
 | **SacidDubFog** 1.0 | *Effect*: live audio into drifting granular textures (the grain engine of Mutable Instruments Clouds: position, size, pitch, density, texture, spread, freeze) and a dark dub delay synced to the tempo (1/8, dotted 1/8, 1/4, with low / high cut and saturation in the repeats). A frozen sound is saved with the project. | [zip](https://github.com/aleksandrsvoboda/sacid-plugins/releases/download/saciddubfog-1.0/SacidDubFog-macos.zip) | [zip](https://github.com/aleksandrsvoboda/sacid-plugins/releases/download/saciddubfog-1.0/SacidDubFog-win64.zip) | [tar.gz](https://github.com/aleksandrsvoboda/sacid-plugins/releases/download/saciddubfog-1.0/SacidDubFog-linux-x64.tar.gz) |
+| **THREAD-M4L** 1.1 | *Max for Live MIDI effect*: THREAD on the **same track as your synth**, in front of it like the Arpeggiator (needs Live Suite or Max for Live). The same engine as SacidThread, plus 1.1's per-row DEJA VU, direction, divider, offset, DICE and row presets, and ratchet / octave / gate / humanize chances. | [zip](https://github.com/aleksandrsvoboda/sacid-plugins/releases/download/sacidthread-m4l-1.1/THREAD-M4L.zip) | [zip](https://github.com/aleksandrsvoboda/sacid-plugins/releases/download/sacidthread-m4l-1.1/THREAD-M4L.zip) | — |
 
 ## Install with one command
 
-Each command lists the eight plugins, marks the ones you already have, and asks which to install:
+Each command lists the plugins (nine on Mac and Windows, eight on Linux), marks the ones you already have, and asks which to install:
 
 ```
   1) SacidOne      mono synth: analog / FM / granular + step sequencer   [installed]
@@ -26,6 +27,7 @@ Each command lists the eight plugins, marks the ones you already have, and asks 
   6) SacidThread   MIDI loop generator, Marbles-style (for another synth)
   7) SacidOddVoice odd short sounds: Plaits string / FM / noise
   8) SacidDubFog   Clouds grains into a dub delay (effect)
+  9) THREAD-M4L    THREAD as a Max for Live MIDI effect, same track as the synth
 
 Which ones? Numbers like "1 3 5", Enter = all, q = quit:
 ```
@@ -69,6 +71,12 @@ The plugins go into `~/.vst3` and the standalone apps into `~/.local/bin`.
 3. Click **Rescan**. On a Mac, hold **Option** while you click it.
 
 The plugins are under **Plug-Ins > VST3 > Sacid**. SacidHalo and SacidDubFog are audio effects (under Audio Effects), SacidThread is a MIDI generator, and the other five are instruments.
+
+### THREAD-M4L: on the same track as the synth
+
+THREAD-M4L is a Max for Live device, not a VST. It needs Live Suite, or Standard with the Max for Live add-on. The installer puts it in your User Library under `Presets/MIDI Effects/Max MIDI Effect/THREAD`: `~/Music/Ableton/User Library` on a Mac, `Documents\Ableton\User Library` on Windows. If you moved your User Library (Live: Settings > Library), move the `THREAD` folder there.
+
+In Live, search the browser for **THREAD**, or open **Places > User Library > Presets > MIDI Effects > Max MIDI Effect > THREAD**. Drag it onto a MIDI track **in front of** the synth, where the Arpeggiator would go. Keep `THREAD.amxd` and `thread.js` together.
 
 ### SacidThread: playing another synth
 
