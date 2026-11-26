@@ -22,7 +22,7 @@ $catalogue = @(
     @{ Name = 'SacidThread';  Tag = 'sacidthread-1.0';  Old = @();                      Desc = 'MIDI loop generator, Marbles-style (for another synth)' },
     @{ Name = 'SacidOddVoice'; Tag = 'sacidoddvoice-1.0.1'; Old = @();                   Desc = 'odd short sounds: Plaits string / FM / noise' },
     @{ Name = 'SacidDubFog';   Tag = 'saciddubfog-1.0';   Old = @();                     Desc = 'Clouds grains into a dub delay (effect)' },
-    @{ Name = 'THREAD-M4L';    Tag = 'sacidthread-m4l-1.1.2'; Old = @();                   Desc = 'THREAD as a Max for Live MIDI effect, same track as the synth' }
+    @{ Name = 'SacidThread-M4L'; Tag = 'sacidthread-m4l-1.2'; Old = @('THREAD');            Desc = 'THREAD as a Max for Live MIDI effect, same track as the synth' }
 )
 
 # --- Pick which ones (before asking for administrator rights) ---------------------------
@@ -87,6 +87,8 @@ foreach ($c in $catalogue) {
         Expand-Archive -Force $zip $out
         Get-ChildItem -Recurse $out | Unblock-File
         New-Item -ItemType Directory -Force $m4l | Out-Null
+        # Earlier device folder names would show up twice in Live's browser.
+        foreach ($old in $c.Old) { Remove-Item -Recurse -Force (Join-Path $m4l $old) -ErrorAction SilentlyContinue }
         Remove-Item -Recurse -Force (Join-Path $m4l $device) -ErrorAction SilentlyContinue
         Copy-Item -Recurse (Join-Path $out $device) $m4l
         Write-Host "  ${name}: Max for Live device in $(Join-Path $m4l $device) (needs Live Suite or Max for Live)"
