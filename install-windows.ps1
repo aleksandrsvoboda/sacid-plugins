@@ -22,7 +22,7 @@ $catalogue = @(
     @{ Name = 'SacidThread';  Tag = 'sacidthread-1.0';  Old = @();                      Desc = 'MIDI loop generator, Marbles-style (for another synth)' },
     @{ Name = 'SacidOddVoice'; Tag = 'sacidoddvoice-1.0.1'; Old = @();                   Desc = 'odd short sounds: Plaits string / FM / noise' },
     @{ Name = 'SacidDubFog';   Tag = 'saciddubfog-1.0';   Old = @();                     Desc = 'Clouds grains into a dub delay (effect)' },
-    @{ Name = 'THREAD-M4L';    Tag = 'sacidthread-m4l-1.1.1'; Old = @();                   Desc = 'THREAD as a Max for Live MIDI effect, same track as the synth' }
+    @{ Name = 'THREAD-M4L';    Tag = 'sacidthread-m4l-1.1.2'; Old = @();                   Desc = 'THREAD as a Max for Live MIDI effect, same track as the synth' }
 )
 
 # --- Pick which ones (before asking for administrator rights) ---------------------------
