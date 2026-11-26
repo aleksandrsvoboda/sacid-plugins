@@ -22,7 +22,7 @@ SacidHalo|sacidhalo-1.0||harmonic exciter + reverb (effect)
 SacidThread|sacidthread-1.0||MIDI loop generator, Marbles-style (for another synth)
 SacidOddVoice|sacidoddvoice-1.0.1||odd short sounds: Plaits string / FM / noise
 SacidDubFog|saciddubfog-1.0||Clouds grains into a dub delay (effect)
-THREAD-M4L|sacidthread-m4l-1.1.2||THREAD as a Max for Live MIDI effect, same track as the synth"
+SacidThread-M4L|sacidthread-m4l-1.2|THREAD|THREAD as a Max for Live MIDI effect, same track as the synth"
 
 entries() { echo "$CATALOGUE" | sed '/^$/d'; }
 count="$(entries | wc -l | tr -d ' ')"
@@ -104,6 +104,8 @@ while IFS='|' read -r name tag olds desc; do
             mkdir -p "$TMP/$name"
             if command -v ditto >/dev/null; then ditto -x -k "$TMP/$name.zip" "$TMP/$name"; else unzip -q "$TMP/$name.zip" -d "$TMP/$name"; fi \
                 || { say "  $name: unzip failed, skipped"; continue; }
+            # Earlier device folder names (olds) would show up twice in Live's browser.
+            for old in $olds; do rm -rf "${M4L:?}/$old"; done
             mkdir -p "$M4L" && rm -rf "$M4L/$device" && cp -R "$TMP/$name/$device" "$M4L/" \
                 && { xattr -cr "$M4L/$device" 2>/dev/null || true; } \
                 && say "  $name: Max for Live device in $M4L/$device (needs Live Suite or Max for Live)"
